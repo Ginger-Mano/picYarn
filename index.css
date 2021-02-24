@@ -1,7 +1,16 @@
-div#main {
-    background-color: rgba(32, 19, 89, 0.879);
+.main {
+    background-color: rgba(197, 191, 224, 0.879);
 }
 
 .welcome {
     background-color: chartreuse;
+}
+
+.navbar {
+    background-color: cornsilk;
+}
+
+.navInner {
+    display: grid;
+    grid-template-columns: auto;
 }
