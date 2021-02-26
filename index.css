@@ -4,6 +4,7 @@
 
 .welcome {
     background-color: chartreuse;
+    padding: 150px;
 }
 
 .navbar {
@@ -13,4 +14,9 @@
 .navInner {
     display: grid;
     grid-template-columns: auto;
+}
+
+.footer {
+    background-color:rgba(197, 191, 224, 0.879);
+    padding: 50px;
 }

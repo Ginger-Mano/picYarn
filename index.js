@@ -61,3 +61,14 @@ let photoCollage = (photos) => {
     eachPhoto.src = photos.image
 }
 
+let footer = () => {
+    let footerDiv = document.createElement('div')
+    footerDiv.className = "footer"
+
+    let footerLink1 = document.createElement('div')
+    footerLink1.innerHTML = "Social"
+
+    footerDiv.append(footerLink1)
+    appBody.append(footerDiv)
+}
+footer()
