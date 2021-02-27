@@ -4,7 +4,9 @@
 
 .welcome {
     background-color: chartreuse;
-    padding: 150px;
+    padding-top: 250px;
+    padding-bottom: 250px;
+    align-items: left;
 }
 
 .navbar {
