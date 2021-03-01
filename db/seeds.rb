@@ -15,7 +15,7 @@ puts "start seed"
 photo1 = Photo.create(
     {
         photographer_name: "Laura Brown",
-        image: "",
+        image: "https://www.stocksy.com/blog/wp-content/uploads/2019/07/startup-agency-using-stock-photography.jpg",
         
     }
 )
@@ -23,14 +23,14 @@ photo1 = Photo.create(
 photo2 = Photo.create(
     {
         photographer_name: "Josh Goodman",
-        image: ""
+        image: "https://www.canon-europe.com/media/Action-1-father_and_son_jump_off_pier_to_sea_tcm13-1374099.jpg"
     }
 )
 
 photo3 = Photo.create(
     {
         photographer_name: "Ansel Adams",
-        image: ""
+        image: "https://thecheatsmovement.com/wp-content/uploads/2020/06/img10-scaled.jpg"
     }
 )
 

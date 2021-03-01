@@ -1,5 +1,12 @@
 let appBody = document.querySelector('.main')
 
+window.addEventListener('DOMContentLoaded', (evt) => {
+    navBar()
+    welcomeDiv()
+
+    footer()
+})
+
 
 let navBar = () => {
     let bar = document.createElement('div')
@@ -20,15 +27,11 @@ let navBar = () => {
     navLiDiv3.className = "navlink"
     navLiDiv3.innerText = "Name"
 
-    // navLink1.append(navLiDiv1)
-    // navLink2.append(navLiDiv2)
-    // navLink3.append(navLiDiv3)
-
     navBarUl.append(navLiDiv1, navLiDiv2, navLiDiv3)
     bar.append(navBarUl)
     appBody.append(bar)
 }
-navBar()
+
 
 
 let welcomeDiv = () => {
@@ -38,27 +41,33 @@ let welcomeDiv = () => {
     welcome.innerText = "Welcome to picYarn!"
 
     appBody.append(welcome)
+    photoCollect()
 }
-welcomeDiv()
+
 
 let photoCollect = () => {
 
     fetch(`http://localhost:3000/photos`)
         .then(res => res.json())
         .then(photos =>
-            console.log(photos)
+            photos.forEach((photo) => {
+                photoCollage(photo)
+            })
+
         )
-
-
 }
-photoCollect()
 
-let photoCollage = (photos) => {
+
+let photoCollage = (photo) => {
     let photoDisplay = document.createElement('div')
     photoDisplay.className = "photos"
 
     let eachPhoto = document.createElement('img')
-    eachPhoto.src = photos.image
+    eachPhoto.className = "photoImg"
+    eachPhoto.src = photo.image
+
+    photoDisplay.append(eachPhoto)
+    appBody.append(photoDisplay)
 }
 
 let footer = () => {
@@ -70,5 +79,5 @@ let footer = () => {
 
     footerDiv.append(footerLink1)
     appBody.append(footerDiv)
+
 }
-footer()

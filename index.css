@@ -19,6 +19,18 @@
 }
 
 .footer {
-    background-color:rgba(197, 191, 224, 0.879);
+    background-color:cornsilk;
     padding: 50px;
+    position: relative;
+}
+
+.photos {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    position: relative
+}
+
+.photoImg {
+    width: 400px;
+    height: 250px
 }
