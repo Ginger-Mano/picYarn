@@ -23,13 +23,71 @@ let navBar = () => {
     navLiDiv2.className = "navlink"
     navLiDiv2.innerText = "About"
 
+    navLiDiv2.addEventListener("click", (evt) => {
+        aboutPage()
+    })
+
     let navLiDiv3 = document.createElement('div')
     navLiDiv3.className = "navlink"
-    navLiDiv3.innerText = "Name"
+    navLiDiv3.innerText = "Profile"
+
+    navLiDiv3.addEventListener("click", (evt) => {
+        newUserForm()
+    })
 
     navBarUl.append(navLiDiv1, navLiDiv2, navLiDiv3)
     bar.append(navBarUl)
     appBody.append(bar)
+}
+
+let aboutPage = () => {
+    let aboutDiv = document.createElement('div')
+    aboutDiv.className = "about"
+
+    let aboutInfo = document.createElement('h2')
+    aboutInfo.innerHTML = "Tester page with other info to come."
+
+    let backBtn = document.createElement("button")
+    backBtn.innerHTML = "Back"
+
+    backBtn.addEventListener("click", (evt) => {
+        aboutDiv.remove()
+    })
+
+    aboutInfo.append(backBtn)
+    aboutDiv.append(aboutInfo)
+    appBody.append(aboutDiv)
+}
+
+let newUserForm = () => {
+    let userFormDiv = document.createElement('div')
+    userFormDiv.className = "userformDiv"
+
+    let userForm = document.createElement("form")
+    userForm.className = "userform"
+
+    // reference input error below
+    let userInput1 = documemt.createElement('input')
+    userInput1.placeholder = "Username"
+
+    let userInput2 = document.createElement('input')
+    userInput2.placeholder = "Location"
+
+    let userInput3 = document.createElement('input')
+    userInput3.placeholder = "Description"
+
+    let userInput4 = document.createElement('input')
+    userInput4.placeholder = "Image"
+
+    let newUserSubmit = document.createElement("button")
+    newUserSubmit.className = "newUserSub"
+    newUserSubmit.innerHTML = "Submit"
+    newUserSubmit.type = "submit"
+
+    userForm.append(userInput1, userInput2, userInput3, userInput4, newUserSubmit)
+    userFormDiv.append(userForm)
+    appBody.append(userFormDiv)
+
 }
 
 
@@ -41,7 +99,6 @@ let welcomeDiv = () => {
     welcome.innerText = "Welcome to picYarn!"
 
     appBody.append(welcome)
-    // photoCollect()
 }
 
 
@@ -54,7 +111,6 @@ let photoCollect = () => {
 
         )
 }
-
 
 let photoCollage = (photos) => {
     let photoGrid = document.createElement('div')
@@ -76,8 +132,6 @@ let photoCollage = (photos) => {
         photoDisplay.append(eachPhoto)
         photoGrid.append(photoDisplay)
     });
-
-
     appBody.append(photoGrid)
 }
 
