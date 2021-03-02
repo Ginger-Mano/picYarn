@@ -15,7 +15,7 @@
 
 .navInner {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: auto auto auto;
 }
 
 .footer {
@@ -24,13 +24,21 @@
     position: relative;
 }
 
-.photos {
+.photogrid {
     display: grid;
     grid-template-columns: auto auto auto;
-    position: relative
+    position: absolute
 }
 
 .photoImg {
-    width: 400px;
-    height: 250px
+    width: 275px;
+    height: 165px;
+}
+
+.button {
+    background-color: red;
+    font-weight: bolder;
+    font-size: 30px;
+    color: white;
+    position: absolute
 }

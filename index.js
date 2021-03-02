@@ -3,7 +3,7 @@ let appBody = document.querySelector('.main')
 window.addEventListener('DOMContentLoaded', (evt) => {
     navBar()
     welcomeDiv()
-
+    photoCollect()
     footer()
 })
 
@@ -41,7 +41,7 @@ let welcomeDiv = () => {
     welcome.innerText = "Welcome to picYarn!"
 
     appBody.append(welcome)
-    photoCollect()
+    // photoCollect()
 }
 
 
@@ -50,24 +50,35 @@ let photoCollect = () => {
     fetch(`http://localhost:3000/photos`)
         .then(res => res.json())
         .then(photos =>
-            photos.forEach((photo) => {
-                photoCollage(photo)
-            })
+            photoCollage(photos)
 
         )
 }
 
 
-let photoCollage = (photo) => {
-    let photoDisplay = document.createElement('div')
-    photoDisplay.className = "photos"
+let photoCollage = (photos) => {
+    let photoGrid = document.createElement('div')
+    photoGrid.className = "photogrid"
 
-    let eachPhoto = document.createElement('img')
-    eachPhoto.className = "photoImg"
-    eachPhoto.src = photo.image
+    photos.forEach((photo) => {
+        let photoDisplay = document.createElement('div')
+        photoDisplay.className = "photos"
 
-    photoDisplay.append(eachPhoto)
-    appBody.append(photoDisplay)
+        let addPhoto = document.createElement("button")
+        addPhoto.className = "button"
+        addPhoto.innerText = "Add"
+
+        let eachPhoto = document.createElement('img')
+        eachPhoto.className = "photoImg"
+        eachPhoto.src = photo.image
+
+        eachPhoto.append(addPhoto)
+        photoDisplay.append(eachPhoto)
+        photoGrid.append(photoDisplay)
+    });
+
+
+    appBody.append(photoGrid)
 }
 
 let footer = () => {
