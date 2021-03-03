@@ -66,8 +66,7 @@ let newUserForm = () => {
     let userForm = document.createElement("form")
     userForm.className = "userform"
 
-    // reference input error below
-    let userInput1 = documemt.createElement('input')
+    let userInput1 = document.createElement('input')
     userInput1.placeholder = "Username"
 
     let userInput2 = document.createElement('input')
@@ -83,6 +82,28 @@ let newUserForm = () => {
     newUserSubmit.className = "newUserSub"
     newUserSubmit.innerHTML = "Submit"
     newUserSubmit.type = "submit"
+
+    newUserSubmit.addEventListener("click", (evt) => {
+        evt.preventDefault()
+
+        fetch(`http://localhost:3000/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: `${evt.target.value}`,
+                location: evt.target.value,
+                description: evt.target.value,
+                image: evt.target.value
+            })
+        })
+            .then(res => res.json())
+            .then(newUser => {
+                console.log(newUser)
+            })
+    })
+
 
     userForm.append(userInput1, userInput2, userInput3, userInput4, newUserSubmit)
     userFormDiv.append(userForm)
