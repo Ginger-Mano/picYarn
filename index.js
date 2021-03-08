@@ -1,14 +1,14 @@
 let appBody = document.querySelector('.main')
 
+
 window.addEventListener('DOMContentLoaded', (evt) => {
-    navBar()
     welcomeDiv()
     photoCollect()
     footer()
 })
 
 
-let navBar = () => {
+let navBar = (() => {
     let bar = document.createElement('div')
     bar.className = "navbar"
 
@@ -38,7 +38,7 @@ let navBar = () => {
     navBarUl.append(navLiDiv1, navLiDiv2, navLiDiv3)
     bar.append(navBarUl)
     appBody.append(bar)
-}
+})()
 
 let aboutPage = () => {
     let aboutDiv = document.createElement('div')
@@ -59,7 +59,17 @@ let aboutPage = () => {
     appBody.append(aboutDiv)
 }
 
-let newUserForm = () => {
+let userList = (() => {
+
+    fetch(`http://localhost:3000/users`)
+        .then(res => res.json())
+        .then(userObj =>
+            console.log(userObj)
+
+        )
+})()
+
+let newUserForm = (userObj) => {
     let userFormDiv = document.createElement('div')
     userFormDiv.className = "userformDiv"
 
@@ -67,21 +77,34 @@ let newUserForm = () => {
     userForm.className = "userform"
 
     let userInput1 = document.createElement('input')
+    userInput1.name = "username"
     userInput1.placeholder = "Username"
+    userInput1.innerText = `${userObj}`.username
 
     let userInput2 = document.createElement('input')
+    userInput2.name = "location"
     userInput2.placeholder = "Location"
+    userInput2.innerText = `${userObj}`.location
 
     let userInput3 = document.createElement('input')
+    userInput3.name = "description"
     userInput3.placeholder = "Description"
+    userInput3.innerText = `${userObj}`.description
 
     let userInput4 = document.createElement('input')
+    userInput1.name = "image"
     userInput4.placeholder = "Image"
+    userInput4.innerHTML = `${userObj}`.image
 
     let newUserSubmit = document.createElement("button")
     newUserSubmit.className = "newUserSub"
     newUserSubmit.innerHTML = "Submit"
     newUserSubmit.type = "submit"
+
+    userForm.append(userInput1, userInput2, userInput3, userInput4, newUserSubmit)
+    userFormDiv.append(userForm)
+    appBody.append(userFormDiv)
+
 
     newUserSubmit.addEventListener("click", (evt) => {
         evt.preventDefault()
@@ -92,7 +115,7 @@ let newUserForm = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: `${evt.target.value}`,
+                username: evt.target.value,
                 location: evt.target.value,
                 description: evt.target.value,
                 image: evt.target.value
@@ -101,14 +124,23 @@ let newUserForm = () => {
             .then(res => res.json())
             .then(newUser => {
                 console.log(newUser)
+                renderUserProfile(newUser)
             })
     })
 
+}
 
-    userForm.append(userInput1, userInput2, userInput3, userInput4, newUserSubmit)
-    userFormDiv.append(userForm)
-    appBody.append(userFormDiv)
+let renderUserProfile = (newUser) => {
+    let userDiv = document.createElement('div')
+    let userDivHeader = document.createElement('h2')
+    userDivHeader.className = "userHeader"
+    userDivHeader.innerHTML = `${newUser}`.username
 
+    let userDesc = document.createElement('h3')
+    userDesc.innerHTML = `${newUser}`.description
+
+    userDiv.append(userDivHeader)
+    userDiv.append(userDesc)
 }
 
 
