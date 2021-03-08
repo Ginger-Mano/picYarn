@@ -59,17 +59,11 @@ let aboutPage = () => {
     appBody.append(aboutDiv)
 }
 
-let userList = (() => {
 
-    fetch(`http://localhost:3000/users`)
-        .then(res => res.json())
-        .then(userObj =>
-            console.log(userObj)
 
-        )
-})()
+let newUserForm = () => {
+    // console.log(userObj);
 
-let newUserForm = (userObj) => {
     let userFormDiv = document.createElement('div')
     userFormDiv.className = "userformDiv"
 
@@ -77,24 +71,24 @@ let newUserForm = (userObj) => {
     userForm.className = "userform"
 
     let userInput1 = document.createElement('input')
-    userInput1.name = "username"
+    userInput1.id = "username"
     userInput1.placeholder = "Username"
-    userInput1.innerText = `${userObj}`.username
+    // userInput1.innerText = `${userObj.username}`
 
     let userInput2 = document.createElement('input')
-    userInput2.name = "location"
+    userInput2.id = "location"
     userInput2.placeholder = "Location"
-    userInput2.innerText = `${userObj}`.location
+    // userInput2.innerText = `${userObj.location}`
 
     let userInput3 = document.createElement('input')
-    userInput3.name = "description"
+    userInput3.id = "description"
     userInput3.placeholder = "Description"
-    userInput3.innerText = `${userObj}`.description
+    // userInput3.innerText = `${userObj.description}`
 
     let userInput4 = document.createElement('input')
-    userInput1.name = "image"
+    userInput4.id = "image"
     userInput4.placeholder = "Image"
-    userInput4.innerHTML = `${userObj}`.image
+    // userInput4.innerHTML = `${userObj.image}`
 
     let newUserSubmit = document.createElement("button")
     newUserSubmit.className = "newUserSub"
@@ -106,8 +100,15 @@ let newUserForm = (userObj) => {
     appBody.append(userFormDiv)
 
 
-    newUserSubmit.addEventListener("click", (evt) => {
+    userForm.addEventListener("submit", (evt) => {
         evt.preventDefault()
+
+        // console.log(userObj);
+        let username = evt.target.querySelector('#username').value
+        let location = evt.target.querySelector('#location').value
+        let description = evt.target.querySelector('#description').value
+        let image = evt.target.querySelector('#image').value
+
 
         fetch(`http://localhost:3000/users`, {
             method: 'POST',
@@ -115,15 +116,16 @@ let newUserForm = (userObj) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: evt.target.value,
-                location: evt.target.value,
-                description: evt.target.value,
-                image: evt.target.value
+                username: username,
+                location: location,
+                description: description,
+                image: image
             })
         })
             .then(res => res.json())
             .then(newUser => {
                 console.log(newUser)
+                // debugger
                 renderUserProfile(newUser)
             })
     })
@@ -134,10 +136,10 @@ let renderUserProfile = (newUser) => {
     let userDiv = document.createElement('div')
     let userDivHeader = document.createElement('h2')
     userDivHeader.className = "userHeader"
-    userDivHeader.innerHTML = `${newUser}`.username
+    userDivHeader.innerHTML = `${newUser.username}`
 
     let userDesc = document.createElement('h3')
-    userDesc.innerHTML = `${newUser}`.description
+    userDesc.innerHTML = `${newUser.description}`
 
     userDiv.append(userDivHeader)
     userDiv.append(userDesc)
