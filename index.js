@@ -62,7 +62,6 @@ let aboutPage = () => {
 
 
 let newUserForm = () => {
-    // console.log(userObj);
 
     let userFormDiv = document.createElement('div')
     userFormDiv.className = "userformDiv"
@@ -103,7 +102,6 @@ let newUserForm = () => {
     userForm.addEventListener("submit", (evt) => {
         evt.preventDefault()
 
-        // console.log(userObj);
         let username = evt.target.querySelector('#username').value
         let location = evt.target.querySelector('#location').value
         let description = evt.target.querySelector('#description').value
@@ -124,8 +122,7 @@ let newUserForm = () => {
         })
             .then(res => res.json())
             .then(newUser => {
-                console.log(newUser)
-                // debugger
+                // console.log(newUser)
                 renderUserProfile(newUser)
             })
     })
@@ -134,6 +131,7 @@ let newUserForm = () => {
 
 let renderUserProfile = (newUser) => {
     let userDiv = document.createElement('div')
+    userDiv.className = "userDiv"
     let userDivHeader = document.createElement('h2')
     userDivHeader.className = "userHeader"
     userDivHeader.innerHTML = `${newUser.username}`
@@ -143,6 +141,7 @@ let renderUserProfile = (newUser) => {
 
     userDiv.append(userDivHeader)
     userDiv.append(userDesc)
+    appBody.append(userDiv)
 }
 
 

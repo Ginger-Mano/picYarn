@@ -42,3 +42,8 @@
     color: white;
     position: absolute
 }
+
+.userDiv {
+    background-color: seashell;
+    padding: 100px
+}
