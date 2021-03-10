@@ -72,17 +72,17 @@ let newUserForm = () => {
     let userInput1 = document.createElement('input')
     userInput1.id = "username"
     userInput1.placeholder = "Username"
-    // userInput1.innerText = `${userObj.username}`
+
 
     let userInput2 = document.createElement('input')
     userInput2.id = "location"
     userInput2.placeholder = "Location"
-    // userInput2.innerText = `${userObj.location}`
+
 
     let userInput3 = document.createElement('input')
     userInput3.id = "description"
     userInput3.placeholder = "Description"
-    // userInput3.innerText = `${userObj.description}`
+
 
     let userInput4 = document.createElement('input')
     userInput4.id = "image"
@@ -125,7 +125,6 @@ let newUserForm = () => {
                 // console.log(newUser)
                 renderUserProfile(newUser)
                 userForm.remove()
-                // editProfileForm(newUser)
             })
     })
 
@@ -155,7 +154,7 @@ let renderUserProfile = (newUser) => {
 
     editUserBtn.addEventListener("click", (evt) => {
         console.log(evt);
-        editProfileForm(newUser)
+        editProfileForm(newUser, userDiv)
     })
 
     let deleteUserBtn = document.createElement('button')
@@ -166,7 +165,7 @@ let renderUserProfile = (newUser) => {
     appBody.append(userDiv)
 }
 
-let editProfileForm = (newUser) => {
+let editProfileForm = (newUser, userDiv) => {
 
     let editUserDiv = document.createElement('div')
     editUserDiv.className = "editUserformDiv"
@@ -204,6 +203,7 @@ let editProfileForm = (newUser) => {
     editUserForm.addEventListener("submit", (evt) => {
         evt.preventDefault()
         console.log(evt);
+        let user = newUser
 
         let username = evt.target.querySelector('#username').value
         let location = evt.target.querySelector('#location').value
@@ -211,7 +211,7 @@ let editProfileForm = (newUser) => {
         let image = evt.target.querySelector('#image').value
 
 
-        fetch(`http://localhost:3000/users/${newUser.id}`, {
+        fetch(`http://localhost:3000/users/${user.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -221,14 +221,13 @@ let editProfileForm = (newUser) => {
                 location: location,
                 description: description,
                 image: image,
-                id: updatedUser.id
             })
         })
             .then(res => res.json())
             .then(updatedUser => {
-                console.log(updatedUser)
                 renderUserProfile(updatedUser)
                 editUserForm.remove()
+                userDiv.remove()
             })
     })
 
