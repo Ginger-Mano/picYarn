@@ -196,30 +196,31 @@ let editProfileForm = () => {
         evt.preventDefault()
         console.log(evt);
 
-        // let username = evt.target.querySelector('#username').value
-        // let location = evt.target.querySelector('#location').value
-        // let description = evt.target.querySelector('#description').value
-        // let image = evt.target.querySelector('#image').value
+        let username = evt.target.querySelector('#username').value
+        let location = evt.target.querySelector('#location').value
+        let description = evt.target.querySelector('#description').value
+        let image = evt.target.querySelector('#image').value
 
 
-        //     fetch(`http://localhost:3000/users/${userObj.id}`, {
-        //         method: 'PATCH',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             username: username,
-        //             location: location,
-        //             description: description,
-        //             image: image
-        //         })
-        //     })
-        //         .then(res => res.json())
-        //         .then(updatedUser => {
-        //             console.log(updatedUser)
-        //             // renderUserProfile(newUser)
-        //             // editUserForm.remove()
-        //         })
+        fetch(`http://localhost:3000/users/${user.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                location: location,
+                description: description,
+                image: image
+            })
+        })
+            .then(res => res.json())
+            .then(updatedUser => {
+                console.log(updatedUser)
+                renderUserProfile(updatedUser)
+                // renderUserProfile(newUser)
+                // editUserForm.remove()
+            })
     })
 
 }
