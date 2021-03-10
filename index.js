@@ -133,12 +133,20 @@ let newUserForm = () => {
 let renderUserProfile = (newUser) => {
     let userDiv = document.createElement('div')
     userDiv.className = "userDiv"
+
     let userDivHeader = document.createElement('h2')
     userDivHeader.className = "userHeader"
     userDivHeader.innerHTML = `${newUser.username}`
 
     let userDesc = document.createElement('h3')
     userDesc.innerHTML = `${newUser.description}`
+
+    let userLoc = document.createElement('h3')
+    userLoc.innerHTML = `${newUser.location}`
+
+    let userAvatar = document.createElement('img')
+    userAvatar.className = "userAvatar"
+    userAvatar.src = `${newUser.image}`
 
     let editUserBtn = document.createElement('button')
     editUserBtn.className = "editbutton"
@@ -153,17 +161,17 @@ let renderUserProfile = (newUser) => {
     deleteUserBtn.className = "delbutton"
     deleteUserBtn.innerText = "Delete"
 
-    userDiv.append(userDivHeader, userDesc, editUserBtn, deleteUserBtn)
+    userDiv.append(userDivHeader, userDesc, userLoc, userAvatar, editUserBtn, deleteUserBtn)
     appBody.append(userDiv)
 }
 
 let editProfileForm = () => {
 
     let editUserDiv = document.createElement('div')
-    editUserDiv.className = "userformDiv"
+    editUserDiv.className = "editUserformDiv"
 
     let editUserForm = document.createElement("form")
-    editUserForm.className = "userform"
+    editUserForm.className = "editUserform"
 
     let editUserInput1 = document.createElement('input')
     editUserInput1.id = "username"
@@ -224,8 +232,6 @@ let editProfileForm = () => {
     })
 
 }
-
-
 
 
 let welcomeDiv = () => {
