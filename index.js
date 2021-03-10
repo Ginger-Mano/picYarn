@@ -161,6 +161,11 @@ let renderUserProfile = (newUser) => {
     deleteUserBtn.className = "delbutton"
     deleteUserBtn.innerText = "Delete"
 
+    deleteUserBtn.addEventListener("click", (evt) => {
+        console.log(evt);
+        deleteUserForm()
+    })
+
     userDiv.append(userDivHeader, userDesc, userLoc, userAvatar, editUserBtn, deleteUserBtn)
     appBody.append(userDiv)
 }
@@ -231,6 +236,29 @@ let editProfileForm = (newUser, userDiv) => {
             })
     })
 
+}
+
+let deleteUserForm = () => {
+    let deleteUserDiv = document.createElement("div")
+    deleteUserDiv.className = "deleteUserDiv"
+
+    let deletePrompt = document.createElement('h3')
+    deletePrompt.innerHTML = "Would you like to delete your profile?"
+
+    let deleteYes = document.createElement('button')
+    deleteYes.innerText = "Yes"
+
+    let deleteNo = document.createElement('button')
+    deleteNo.innerText = "No"
+
+    deleteUserDiv.append(deletePrompt, deleteYes, deleteNo)
+    appBody.append(deleteUserDiv)
+
+    deleteYes.addEventListener("submit", (evt) => {
+        evt.preventDefault()
+
+
+    })
 }
 
 
