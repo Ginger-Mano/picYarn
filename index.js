@@ -87,7 +87,7 @@ let newUserForm = () => {
     let userInput4 = document.createElement('input')
     userInput4.id = "image"
     userInput4.placeholder = "Image"
-    // userInput4.innerHTML = `${userObj.image}`
+    userInput4.innerHTML = ""
 
     let newUserSubmit = document.createElement("button")
     newUserSubmit.className = "newUserSub"
@@ -124,6 +124,7 @@ let newUserForm = () => {
             .then(newUser => {
                 // console.log(newUser)
                 renderUserProfile(newUser)
+                userForm.remove()
             })
     })
 
