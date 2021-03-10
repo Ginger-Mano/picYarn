@@ -140,10 +140,90 @@ let renderUserProfile = (newUser) => {
     let userDesc = document.createElement('h3')
     userDesc.innerHTML = `${newUser.description}`
 
-    userDiv.append(userDivHeader)
-    userDiv.append(userDesc)
+    let editUserBtn = document.createElement('button')
+    editUserBtn.className = "editbutton"
+    editUserBtn.innerText = "Edit"
+
+    editUserBtn.addEventListener("click", (evt) => {
+        console.log(evt);
+        editProfileForm()
+    })
+
+    let deleteUserBtn = document.createElement('button')
+    deleteUserBtn.className = "delbutton"
+    deleteUserBtn.innerText = "Delete"
+
+    userDiv.append(userDivHeader, userDesc, editUserBtn, deleteUserBtn)
     appBody.append(userDiv)
 }
+
+let editProfileForm = () => {
+
+    let editUserDiv = document.createElement('div')
+    editUserDiv.className = "userformDiv"
+
+    let editUserForm = document.createElement("form")
+    editUserForm.className = "userform"
+
+    let editUserInput1 = document.createElement('input')
+    editUserInput1.id = "username"
+    editUserInput1.placeholder = "Username"
+
+    let editUserInput2 = document.createElement('input')
+    editUserInput2.id = "location"
+    editUserInput2.placeholder = "Location"
+
+    let editUserInput3 = document.createElement('input')
+    editUserInput3.id = "description"
+    editUserInput3.placeholder = "Description"
+
+
+    let editUserInput4 = document.createElement('input')
+    editUserInput4.id = "image"
+    editUserInput4.placeholder = "Image"
+    editUserInput4.innerHTML = ""
+
+    let editUserSubmit = document.createElement("button")
+    editUserSubmit.className = "newUserSub"
+    editUserSubmit.innerHTML = "Submit"
+    editUserSubmit.type = "submit"
+
+    editUserForm.append(editUserInput1, editUserInput2, editUserInput3, editUserInput4, editUserSubmit)
+    editUserDiv.append(editUserForm)
+    appBody.append(editUserDiv)
+
+    editUserForm.addEventListener("submit", (evt) => {
+        evt.preventDefault()
+        console.log(evt);
+
+        // let username = evt.target.querySelector('#username').value
+        // let location = evt.target.querySelector('#location').value
+        // let description = evt.target.querySelector('#description').value
+        // let image = evt.target.querySelector('#image').value
+
+
+        //     fetch(`http://localhost:3000/users/${userObj.id}`, {
+        //         method: 'PATCH',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             username: username,
+        //             location: location,
+        //             description: description,
+        //             image: image
+        //         })
+        //     })
+        //         .then(res => res.json())
+        //         .then(updatedUser => {
+        //             console.log(updatedUser)
+        //             // renderUserProfile(newUser)
+        //             // editUserForm.remove()
+        //         })
+    })
+
+}
+
 
 
 
