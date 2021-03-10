@@ -14,14 +14,17 @@ class UsersController < ApplicationController
         render json: user
     end
 
-    # def edit
-    #     user = User.find(params[:id])
-    # end
-
     def update
         user = User.find(user_params[:id])
         user.update(user_params)
         render json: user
+    end
+
+    def destroy
+        user = User.find(user_params[:id])
+        user.destroy
+        render json: user
+
     end
 
     private

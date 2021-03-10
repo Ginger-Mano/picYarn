@@ -121,32 +121,31 @@ let newUserForm = () => {
             })
         })
             .then(res => res.json())
-            .then(newUser => {
-                // console.log(newUser)
-                renderUserProfile(newUser)
+            .then(createdUser => {
+                renderUserProfile(createdUser)
                 userForm.remove()
             })
     })
 
 }
 
-let renderUserProfile = (newUser) => {
+let renderUserProfile = (createdUser) => {
     let userDiv = document.createElement('div')
     userDiv.className = "userDiv"
 
     let userDivHeader = document.createElement('h2')
     userDivHeader.className = "userHeader"
-    userDivHeader.innerHTML = `${newUser.username}`
+    userDivHeader.innerHTML = `${createdUser.username}`
 
     let userDesc = document.createElement('h3')
-    userDesc.innerHTML = `${newUser.description}`
+    userDesc.innerHTML = `${createdUser.description}`
 
     let userLoc = document.createElement('h3')
-    userLoc.innerHTML = `${newUser.location}`
+    userLoc.innerHTML = `${createdUser.location}`
 
     let userAvatar = document.createElement('img')
     userAvatar.className = "userAvatar"
-    userAvatar.src = `${newUser.image}`
+    userAvatar.src = `${createdUser.image}`
 
     let editUserBtn = document.createElement('button')
     editUserBtn.className = "editbutton"
@@ -154,7 +153,7 @@ let renderUserProfile = (newUser) => {
 
     editUserBtn.addEventListener("click", (evt) => {
         console.log(evt);
-        editProfileForm(newUser, userDiv)
+        editProfileForm(createdUser, userDiv)
     })
 
     let deleteUserBtn = document.createElement('button')
@@ -163,14 +162,14 @@ let renderUserProfile = (newUser) => {
 
     deleteUserBtn.addEventListener("click", (evt) => {
         console.log(evt);
-        deleteUserForm()
+        deleteUserForm(createdUser, userDiv)
     })
 
     userDiv.append(userDivHeader, userDesc, userLoc, userAvatar, editUserBtn, deleteUserBtn)
     appBody.append(userDiv)
 }
 
-let editProfileForm = (newUser, userDiv) => {
+let editProfileForm = (createdUser, userDiv) => {
 
     let editUserDiv = document.createElement('div')
     editUserDiv.className = "editUserformDiv"
@@ -208,7 +207,7 @@ let editProfileForm = (newUser, userDiv) => {
     editUserForm.addEventListener("submit", (evt) => {
         evt.preventDefault()
         console.log(evt);
-        let user = newUser
+        let user = createdUser
 
         let username = evt.target.querySelector('#username').value
         let location = evt.target.querySelector('#location').value
@@ -238,7 +237,7 @@ let editProfileForm = (newUser, userDiv) => {
 
 }
 
-let deleteUserForm = () => {
+let deleteUserForm = (createdUser, userDiv) => {
     let deleteUserDiv = document.createElement("div")
     deleteUserDiv.className = "deleteUserDiv"
 
@@ -254,9 +253,20 @@ let deleteUserForm = () => {
     deleteUserDiv.append(deletePrompt, deleteYes, deleteNo)
     appBody.append(deleteUserDiv)
 
-    deleteYes.addEventListener("submit", (evt) => {
+    deleteYes.addEventListener("click", (evt) => {
         evt.preventDefault()
+        console.log(evt);
 
+        fetch(`http://localhost:3000/users/${createdUser.id}`, {
+            method: 'DELETE',
+
+        })
+            .then(res => res.json())
+            .then(deletedUser => {
+                console.log(deletedUser);
+                userDiv.remove()
+                deleteUserDiv.remove()
+            })
 
     })
 }
