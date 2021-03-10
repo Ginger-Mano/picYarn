@@ -125,6 +125,7 @@ let newUserForm = () => {
                 // console.log(newUser)
                 renderUserProfile(newUser)
                 userForm.remove()
+                // editProfileForm(newUser)
             })
     })
 
@@ -154,7 +155,7 @@ let renderUserProfile = (newUser) => {
 
     editUserBtn.addEventListener("click", (evt) => {
         console.log(evt);
-        editProfileForm()
+        editProfileForm(newUser)
     })
 
     let deleteUserBtn = document.createElement('button')
@@ -165,7 +166,7 @@ let renderUserProfile = (newUser) => {
     appBody.append(userDiv)
 }
 
-let editProfileForm = () => {
+let editProfileForm = (newUser) => {
 
     let editUserDiv = document.createElement('div')
     editUserDiv.className = "editUserformDiv"
@@ -210,7 +211,7 @@ let editProfileForm = () => {
         let image = evt.target.querySelector('#image').value
 
 
-        fetch(`http://localhost:3000/users/${user.id}`, {
+        fetch(`http://localhost:3000/users/${newUser.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -219,15 +220,15 @@ let editProfileForm = () => {
                 username: username,
                 location: location,
                 description: description,
-                image: image
+                image: image,
+                id: updatedUser.id
             })
         })
             .then(res => res.json())
             .then(updatedUser => {
                 console.log(updatedUser)
                 renderUserProfile(updatedUser)
-                // renderUserProfile(newUser)
-                // editUserForm.remove()
+                editUserForm.remove()
             })
     })
 
