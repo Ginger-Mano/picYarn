@@ -33,14 +33,29 @@
 .photoImg {
     width: 275px;
     height: 165px;
+   position: absolute
+}
+
+.photos {
+    position: relative;
+}
+
+.photos .button {
+    position: absolute;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 10px;
+    z-index: 2;
 }
 
 .button {
     background-color: red;
+    padding: 80px;
     font-weight: bolder;
     font-size: 30px;
     color: white;
-    position: absolute
 }
 
 .userDiv {
@@ -51,4 +66,8 @@
 .userAvatar {
     width: 30%;
     height: 30%
+}
+
+.alertDiv {
+position: relative
 }

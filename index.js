@@ -281,6 +281,19 @@ let welcomeDiv = () => {
     appBody.append(welcome)
 }
 
+// let pexelsPhotos = () => {
+
+//     const client = createClient('563492ad6f91700001000001b12ffd1ababd49f29bd3bd3e9ac8e788');
+
+//     fetch(`https://api.pexels.com/v1`) {
+//         method: "GET"
+//             .then(res => res.json())
+//             .then(photos =>
+//                 photoCollage(photos)
+
+//     })
+// }
+
 
 let photoCollect = () => {
 
@@ -302,17 +315,38 @@ let photoCollage = (photos) => {
 
         let addPhoto = document.createElement("button")
         addPhoto.className = "button"
-        addPhoto.innerText = "Add"
+        addPhoto.innerText = "Use"
 
         let eachPhoto = document.createElement('img')
         eachPhoto.className = "photoImg"
         eachPhoto.src = photo.image
 
-        eachPhoto.append(addPhoto)
-        photoDisplay.append(eachPhoto)
+        addPhoto.addEventListener("click", (evt) => {
+            console.log(evt)
+            newStoryAlert()
+        })
+        // eachPhoto.append(addPhoto)
+        photoDisplay.append(eachPhoto, addPhoto)
         photoGrid.append(photoDisplay)
     });
     appBody.append(photoGrid)
+}
+
+let newStoryAlert = () => {
+    let newStoryAlertDiv = document.createElement('div')
+    newStoryAlertDiv.className = "alertDiv"
+
+    let newStoryConfirm = document.createElement('h6')
+    newStoryConfirm.innerText = "Use this photo for your story?"
+
+    let yesForStory = document.createElement('button')
+    yesForStory.innerText = "Yes"
+
+    let noForStory = document.createElement('button')
+    noForStory.innerText = "No"
+
+    newStoryAlertDiv.append(newStoryConfirm, yesForStory, noForStory)
+    appBody.append(newStoryAlertDiv)
 }
 
 let footer = () => {
