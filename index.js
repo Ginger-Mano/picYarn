@@ -324,6 +324,7 @@ let photoCollage = (photos) => {
         addPhoto.addEventListener("click", (evt) => {
             console.log(evt)
             newStoryAlert()
+
         })
         // eachPhoto.append(addPhoto)
         photoDisplay.append(eachPhoto, addPhoto)
@@ -344,6 +345,10 @@ let newStoryAlert = () => {
 
     let noForStory = document.createElement('button')
     noForStory.innerText = "No"
+
+    noForStory.addEventListener("click", (evt) => {
+        newStoryAlertDiv.remove()
+    })
 
     newStoryAlertDiv.append(newStoryConfirm, yesForStory, noForStory)
     appBody.append(newStoryAlertDiv)
