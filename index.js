@@ -316,16 +316,24 @@ let photoCollage = (photos) => {
         let addPhoto = document.createElement("button")
         addPhoto.className = "button"
         addPhoto.innerText = "Use"
+        addPhoto.onclick = false
+
 
         let eachPhoto = document.createElement('img')
         eachPhoto.className = "photoImg"
         eachPhoto.src = photo.image
 
+
         addPhoto.addEventListener("click", (evt) => {
             console.log(evt)
-            newStoryAlert()
+            if (addPhoto.onclick) {
+                newStoryAlert()
+            } else {
+                console.log("Hello")
+            }
+        })
 
-        }, { once: true })
+
         // eachPhoto.append(addPhoto)
         photoDisplay.append(eachPhoto, addPhoto)
         photoGrid.append(photoDisplay)
@@ -333,12 +341,14 @@ let photoCollage = (photos) => {
     appBody.append(photoGrid)
 }
 
-let newStoryAlert = () => {
+let newStoryAlert = (eachPhoto) => {
     let newStoryAlertDiv = document.createElement('div')
     newStoryAlertDiv.className = "alertDiv"
 
     let newStoryConfirm = document.createElement('h6')
     newStoryConfirm.innerText = "Use this photo for your story?"
+
+    //    if photo id and button id is the same, render that photo 
 
     let yesForStory = document.createElement('button')
     yesForStory.innerText = "Yes"
