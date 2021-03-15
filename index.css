@@ -69,5 +69,7 @@
 }
 
 .alertDiv {
-position: relative
+position: relative;
+background-color: white;
 }
+

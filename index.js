@@ -325,7 +325,7 @@ let photoCollage = (photos) => {
             console.log(evt)
             newStoryAlert()
 
-        })
+        }, { once: true })
         // eachPhoto.append(addPhoto)
         photoDisplay.append(eachPhoto, addPhoto)
         photoGrid.append(photoDisplay)
