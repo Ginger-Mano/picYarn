@@ -1,5 +1,5 @@
 let appBody = document.querySelector('.main')
-
+let userPage = document.querySelector('.userpage')
 
 window.addEventListener('DOMContentLoaded', (evt) => {
     welcomeDiv()
@@ -253,6 +253,10 @@ let deleteUserForm = (createdUser, userDiv) => {
     deleteUserDiv.append(deletePrompt, deleteYes, deleteNo)
     appBody.append(deleteUserDiv)
 
+    deleteNo.addEventListener("click", (evt) => {
+        deleteUserDiv.remove()
+    })
+
     deleteYes.addEventListener("click", (evt) => {
         evt.preventDefault()
         console.log(evt);
@@ -316,7 +320,7 @@ let photoCollage = (photos) => {
         let addPhoto = document.createElement("button")
         addPhoto.className = "button"
         addPhoto.innerText = "Use"
-        addPhoto.onclick = false
+        addPhoto.onclick = true
 
 
         let eachPhoto = document.createElement('img')
@@ -326,11 +330,7 @@ let photoCollage = (photos) => {
 
         addPhoto.addEventListener("click", (evt) => {
             console.log(evt)
-            if (addPhoto.onclick) {
-                newStoryAlert()
-            } else {
-                console.log("Hello")
-            }
+            newStoryAlert()
         })
 
 
@@ -341,7 +341,7 @@ let photoCollage = (photos) => {
     appBody.append(photoGrid)
 }
 
-let newStoryAlert = (eachPhoto) => {
+let newStoryAlert = () => {
     let newStoryAlertDiv = document.createElement('div')
     newStoryAlertDiv.className = "alertDiv"
 

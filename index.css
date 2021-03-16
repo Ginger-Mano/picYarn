@@ -69,7 +69,15 @@
 }
 
 .alertDiv {
-position: relative;
+/* position: relative; */
 background-color: white;
+position: fixed ; 
+z-index: 1; 
+overflow: auto; 
+margin: 15% auto; 
+padding: 10px;
+border: 1px solid #888;
+font-size: 20px;
+width: 80%; 
 }
 
