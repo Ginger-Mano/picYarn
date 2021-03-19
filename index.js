@@ -353,6 +353,11 @@ let newStoryAlert = () => {
     let yesForStory = document.createElement('button')
     yesForStory.innerText = "Yes"
 
+    yesForStory.addEventListener("click", (evt) => {
+        console.log("yes")
+        // POST fetch for newStoryAlertDiv, move to pass in user id, render div with photo, input, and submit button
+    })
+
     let noForStory = document.createElement('button')
     noForStory.innerText = "No"
 
