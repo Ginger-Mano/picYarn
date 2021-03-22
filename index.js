@@ -1,6 +1,8 @@
 let appBody = document.querySelector('.main')
 let userPage = document.querySelector('.userpage')
 
+
+
 window.addEventListener('DOMContentLoaded', (evt) => {
     welcomeDiv()
     photoCollect()
@@ -285,18 +287,16 @@ let welcomeDiv = () => {
     appBody.append(welcome)
 }
 
-// let pexelsPhotos = () => {
+let pexelsPhotos = () => {
+    fetch(`https://api.pexels.com/v1/`)
 
-//     const client = createClient('563492ad6f91700001000001b12ffd1ababd49f29bd3bd3e9ac8e788');
+        .then(res => res.json())
+        .then(photos =>
+            photoCollage(photos)
 
-//     fetch(`https://api.pexels.com/v1`) {
-//         method: "GET"
-//             .then(res => res.json())
-//             .then(photos =>
-//                 photoCollage(photos)
-
-//     })
-// }
+        )
+}
+pexelsPhotos()
 
 
 let photoCollect = () => {
