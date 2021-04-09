@@ -79,6 +79,7 @@ story1 = Story.create(
         title: "The Bad Doll",
         likes: 23,
         wordcount: 451,
+        text: "Once upon a time in the sea...",
         author: "haiku",
         user: haiku,
         photo: photo1
@@ -90,6 +91,7 @@ story2 = Story.create(
         title: "Why Love Doesn't Last",
         likes: 44,
         wordcount: 492,
+        text: "I love cookies. Once when I was baking...",
         author: "blogQween",
         user: blogqueen,
         photo: photo2
@@ -101,6 +103,7 @@ story3 = Story.create(
         title: "The Pains of Sheep",
         likes: 3,
         wordcount: 387,
+        text: "Sincerity is the best policy. Speaking of truth...",
         author: "poetic",
         user: poetic,
         photo: photo3

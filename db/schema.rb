@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_211023) do
     t.string "title"
     t.integer "likes"
     t.integer "wordcount"
+    t.string "text"
     t.string "author"
     t.bigint "user_id", null: false
     t.bigint "photo_id", null: false
