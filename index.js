@@ -388,6 +388,26 @@ let newStoryAlert = (createdUser) => {
     appBody.append(newStoryAlertDiv)
 }
 
+let newStoryForm = () => {
+    let newFormDiv = document.createElement('div')
+    newFormDiv.className = "newStoryForm"
+
+    let titleInput = document.createElement('input')
+    titleInput.id = "title"
+    titleInput.placeholder = "Your Title"
+
+    let uNameInput = document.createElement('input')
+    uNameInput.id = "title"
+    uNameInput.placeholder = "Your Title"
+
+    let ctnbutton = document.createElement('button')
+    ctnbutton.className = "ctnbutton"
+    ctnbutton.innerText = "Continue"
+
+    newFormDiv.append(titleInput, uNameInput, ctnbutton)
+    appBody.append(newFormDiv)
+}
+
 let renderNewStory = (newStory) => {
 let newStoryDiv = document.createElement('div')
 newStoryDiv.className = "storyDiv"
