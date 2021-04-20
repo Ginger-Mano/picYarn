@@ -355,25 +355,7 @@ let newStoryAlert = (createdUser) => {
 
     yesForStory.addEventListener("click", (evt) => {
         console.log("yes")
-        let author = evt.target.querySelector('#author').value
-        let title = evt.target.querySelector('#title').value
-        // POST fetch for newStoryAlertDiv, move to pass in user id, render div with photo, input, and submit button
-
-        fetch (`http://localhost:3000/stories`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                title: title,
-                author: createdUser.username
-            })
-        })
-            .then(res => res.json())
-            .then(newStory => {
-                renderNewStory(newStory)
-                newStoryForm.remove()
-            })
+        newStoryForm()
         
     })
 
@@ -397,12 +379,36 @@ let newStoryForm = () => {
     titleInput.placeholder = "Your Title"
 
     let uNameInput = document.createElement('input')
-    uNameInput.id = "title"
-    uNameInput.placeholder = "Your Title"
+    uNameInput.id = "author"
+    uNameInput.placeholder = "Your Name"
 
     let ctnbutton = document.createElement('button')
     ctnbutton.className = "ctnbutton"
     ctnbutton.innerText = "Continue"
+
+    ctnbutton.addEventListener("click", (evt) => {
+        console.log("clicked")
+
+        // let author = evt.target.querySelector('#author').value
+        // let title = evt.target.querySelector('#title').value
+        // // POST fetch for newStoryAlertDiv, move to pass in user id, render div with photo, input, and submit button
+
+        // fetch (`http://localhost:3000/stories`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         title: title,
+        //         author: createdUser.username
+        //     })
+        // })
+        //     .then(res => res.json())
+        //     .then(newStory => {
+        //         // renderNewStory(newStory)
+        //         newStoryForm(newStory)
+        //     })
+    })
 
     newFormDiv.append(titleInput, uNameInput, ctnbutton)
     appBody.append(newFormDiv)
