@@ -332,8 +332,6 @@ let photoCollage = (photos) => {
             console.log(evt)
             newStoryAlert()
         })
-
-
         // eachPhoto.append(addPhoto)
         photoDisplay.append(eachPhoto, addPhoto)
         photoGrid.append(photoDisplay)
@@ -341,7 +339,7 @@ let photoCollage = (photos) => {
     appBody.append(photoGrid)
 }
 
-let newStoryAlert = (createdUser) => {
+let newStoryAlert = (photos) => {
     let newStoryAlertDiv = document.createElement('div')
     newStoryAlertDiv.className = "alertDiv"
 
@@ -355,7 +353,7 @@ let newStoryAlert = (createdUser) => {
 
     yesForStory.addEventListener("click", (evt) => {
         console.log("yes")
-        newStoryForm()
+        newStoryForm(photos)
         
     })
 
@@ -371,55 +369,67 @@ let newStoryAlert = (createdUser) => {
 }
 
 let newStoryForm = () => {
-    let newFormDiv = document.createElement('div')
-    newFormDiv.className = "newStoryForm"
+    let storyFormDiv = document.createElement('div')
+    storyFormDiv.className = "storyFormDiv"
+
+    let newStoryForm = document.createElement("form")
+    newStoryForm.className = "newStoryForm"
 
     let titleInput = document.createElement('input')
     titleInput.id = "title"
     titleInput.placeholder = "Your Title"
 
-    let uNameInput = document.createElement('input')
-    uNameInput.id = "author"
-    uNameInput.placeholder = "Your Name"
+    let authorInput = document.createElement('input')
+    authorInput.id = "author"
+    authorInput.placeholder = "Author Name"
 
     let ctnbutton = document.createElement('button')
     ctnbutton.className = "ctnbutton"
     ctnbutton.innerText = "Continue"
 
     ctnbutton.addEventListener("click", (evt) => {
+      
         console.log("clicked")
+     
+        let author = evt.target.querySelector('#author').value
+        let title = evt.target.querySelector('#title').value
+        
+        // POST fetch for newStoryAlertDiv, move to pass in user id, render div with photo, input, and submit button
 
-        // let author = evt.target.querySelector('#author').value
-        // let title = evt.target.querySelector('#title').value
-        // // POST fetch for newStoryAlertDiv, move to pass in user id, render div with photo, input, and submit button
-
-        // fetch (`http://localhost:3000/stories`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         title: title,
-        //         author: createdUser.username
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(newStory => {
-        //         // renderNewStory(newStory)
-        //         newStoryForm(newStory)
-        //     })
+        fetch (`http://localhost:3000/stories/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: title,
+                author: author
+            })
+        })
+            .then(res => res.json())
+            .then(newStory => {
+              
+                renderNewStory(newStory)
+                debugger
+                newStoryForm.remove()
+            })
     })
 
-    newFormDiv.append(titleInput, uNameInput, ctnbutton)
-    appBody.append(newFormDiv)
+    newStoryForm.append(titleInput, authorInput, ctnbutton)
+    storyFormDiv.append(newStoryForm)
+    appBody.append(storyFormDiv)
 }
 
 let renderNewStory = (newStory) => {
+   
 let newStoryDiv = document.createElement('div')
 newStoryDiv.className = "storyDiv"
 
 let storyTitle = document.createElement('h1')
 storyTitle.innerHTML = newStory.title
+
+let storyAuthor = document.createElement('h1')
+storyAuthor.innerHTML = newStory.author
 
 let storyText = document.createElement('input')
 storyText.innerHTML = newStory.text
@@ -430,7 +440,7 @@ storyEdit.innerText = "Edit"
 let storyDelBtn = document.createElement('button')
 storyDelBtn.innerText = "Delete"
 
-newStoryDiv.append(storyTitle, storyText, storyEdit, storyDelBtn)
+newStoryDiv.append(storyTitle, storyAuthor, storyText, storyEdit, storyDelBtn)
 appBody.append(newStoryDiv)
 
 }
