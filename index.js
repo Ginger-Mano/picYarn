@@ -19,11 +19,17 @@ let navBar = (() => {
 
     let navLiDiv1 = document.createElement('div')
     navLiDiv1.className = "navlink"
-    navLiDiv1.innerText = "picYarn"
+
+    let navLi1Head = document.createElement('h4')
+    navLi1Head.className = "navLi1Head"
+    navLi1Head.innerText = "picYarn"
 
     let navLiDiv2 = document.createElement('div')
     navLiDiv2.className = "navlink"
-    navLiDiv2.innerText = "About"
+
+    let navLi2Head = document.createElement('h4')
+    navLi2Head.className = "navLi2Head"
+    navLi2Head.innerText = "About"
 
     navLiDiv2.addEventListener("click", (evt) => {
         aboutPage()
@@ -31,12 +37,18 @@ let navBar = (() => {
 
     let navLiDiv3 = document.createElement('div')
     navLiDiv3.className = "navlink"
-    navLiDiv3.innerText = "Profile"
+
+    let navLi3Head = document.createElement('h4')
+    navLi3Head.className = "navLi3Head"
+    navLi3Head.innerText = "Profile"
 
     navLiDiv3.addEventListener("click", (evt) => {
         newUserForm()
     })
 
+    navLiDiv1.append(navLi1Head)
+    navLiDiv2.append(navLi2Head)
+    navLiDiv3.append(navLi3Head)
     navBarUl.append(navLiDiv1, navLiDiv2, navLiDiv3)
     bar.append(navBarUl)
     appBody.append(bar)
@@ -391,12 +403,14 @@ let newStoryForm = () => {
       
         console.log("clicked")
      
-        let author = evt.target.querySelector('#author').value
-        let title = evt.target.querySelector('#title').value
+        let title = evt.target.value
+        let author = evt.target.value
+
+        console.log(title)
         
         // POST fetch for newStoryAlertDiv, move to pass in user id, render div with photo, input, and submit button
 
-        fetch (`http://localhost:3000/stories/`, {
+        fetch (`http://localhost:3000/stories`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -435,12 +449,12 @@ let storyText = document.createElement('input')
 storyText.innerHTML = newStory.text
 
 let storyEditBtn = document.createElement('button')
-storyEdit.innerText = "Edit"
+storyEditBtn.innerText = "Edit"
 
 let storyDelBtn = document.createElement('button')
 storyDelBtn.innerText = "Delete"
 
-newStoryDiv.append(storyTitle, storyAuthor, storyText, storyEdit, storyDelBtn)
+newStoryDiv.append(storyTitle, storyAuthor, storyText, storyEditBtn, storyDelBtn)
 appBody.append(newStoryDiv)
 
 }

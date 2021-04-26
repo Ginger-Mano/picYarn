@@ -4,6 +4,11 @@ class StoriesController < ApplicationController
         render json: story
     end
 
+    def show
+        story = Story.find(story_params[:id])
+        render json: story
+    end
+
     def create
         story = Story.create(story_params)
         render json: story
